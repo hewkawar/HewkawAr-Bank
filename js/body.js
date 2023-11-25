@@ -270,3 +270,26 @@ function convertPUA() {
         }
     })
 }
+
+function populateMonthYearDropdown() {
+    var select = document.getElementById("monthYearSelect");
+
+    var startYear = 2023;
+    var startMonth = 11;
+
+    var currentDate = new Date();
+    var currentYear = currentDate.getFullYear();
+    var currentMonth = currentDate.getMonth() + 1;
+
+    for (var year = startYear; year <= currentYear; year++) {
+        var endMonth = (year === currentYear) ? currentMonth : 12;
+        for (var month = (year === startYear) ? startMonth : 1; month <= endMonth; month++) {
+            var option = document.createElement("option");
+            option.value = year + "-" + (month < 10 ? "0" + month : month);
+            option.text = month + "/" + year;
+            select.add(option);
+        }
+    }
+}
+
+populateMonthYearDropdown();

@@ -34,12 +34,16 @@
 
             <div class="d-flex c-pointer" onclick="logout()">
                 <p id="userdisplayname" class="me-2"></p>
-                <img src="" id="userprofile" alt="Logo" width="30" height="30"
-                    class="d-inline-block align-text-top">
+                <img src="" id="userprofile" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
             </div>
         </div>
     </nav>
     <div class="container text-center position-absolute top-50 start-50 translate-middle">
+
+        <label for="monthYearSelect">Select Month and Year:</label>
+        <select id="monthYearSelect" name="monthYearSelect">
+            
+        </select>
         <div class="balance mt-3">
             <div class="br-balance_all">
                 <h2>ยอดเงิน</h2>
@@ -50,7 +54,7 @@
                 <h3 id="balance">-</h3>
             </div>
             <div class="br-balance_pua border-top-0">
-                <h2>เหรียณ PUA</h2>
+                <h2>เหรียญ PUA</h2>
                 <h3 id="balance_pua">-</h3>
             </div>
             <div class="transetion row g-0 c-pointer">
@@ -74,6 +78,9 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/gh/hewkawar/HewkawAr-Bank@main/js/body.min.js"></script>
+    <script>
+        
+    </script>
 </body>
 
 </html>
