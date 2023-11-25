@@ -109,7 +109,7 @@ function getHewkawArLoginDetail() {
 
 function HewkawArLogin() {
     axios.post('https://api.hewkawar.xyz/oauth2/login', {
-        redirect_url: "http://127.0.0.1:5500/login.html"
+        redirect_url: "https://bank.hewkawar.xyz/login.html"
     }).then((response) => {
         setCookie("code", response.data.code, 4)
         window.location.href = response.data.url;
