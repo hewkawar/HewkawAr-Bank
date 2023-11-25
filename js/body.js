@@ -107,9 +107,9 @@ function getHewkawArLoginDetail() {
     });
 }
 
-function HewkawArLogin() {
+function HewkawArLogin(redirect_url) {
     axios.post('https://api.hewkawar.xyz/oauth2/login', {
-        redirect_url: "https://bank.hewkawar.xyz/login.html"
+        redirect_url: redirect_url
     }).then((response) => {
         setCookie("code", response.data.code, 4)
         window.location.href = response.data.url;
