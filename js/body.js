@@ -292,4 +292,9 @@ function populateMonthYearDropdown() {
     }
 }
 
+function monthYearSelectOnChange() {
+    const [year, month] = document.getElementById("monthYearSelect").value.split('-');
+    getHewkawArLoginDetail()
+}
+
 populateMonthYearDropdown();
