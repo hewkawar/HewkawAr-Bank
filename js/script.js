@@ -25,18 +25,21 @@ async function HewkawArLogout() {
         if (error.response && error.response.status === 406) {
             Swal.fire({
                 title: "Access Denied",
-                icon: "error"
+                icon: "error",
+                willClose: () => {
+                    window.location.href = "/login";
+                }
             })
         } else {
             Swal.fire({
                 title: "Something error",
                 text: "try again later",
-                icon: "error"
+                icon: "error",
+                willClose: () => {
+                    window.location.href = "/login";
+                }
             })
         }
-        window.location.href = "/login";
     });
-
-    window.location.href = "/login";
 }
 
