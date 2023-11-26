@@ -1,7 +1,7 @@
 async function HewkawArLogout() {
-    deleteCookie("session");
-    deleteCookie("code");
+    removelocalStorage("session");
+    removelocalStorage("code");
 
-    window.location.href = "/login.html";
+    window.location.href = "/login";
 }
 
