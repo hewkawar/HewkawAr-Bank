@@ -9,7 +9,7 @@ async function HewkawArLogout() {
         data: {
             session_id: session_id
         }
-    }).than((response) => {
+    }).then((response) => {
         Swal.fire({
             title: "Logout Success!",
             text: "We will redirect you soon",
