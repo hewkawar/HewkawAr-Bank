@@ -31,36 +31,46 @@ function getSession(month, year) {
             userprofile.src = response.data.profileurl;
             userdisplayname.innerText = response.data.displayname;
 
-            if (month && year) {
-                axios(`https://api.hewkawar.xyz/app/bank/transition?session_id=${session_id}&month=${month}&year=${year}`).then((response) => {
-                    const loadScreen = document.getElementById('loadScreen');
-                    const loader = document.getElementById('loader');
-                    loadScreen.style.display = 'none';
-                    loader.style.display = 'none';
-                    balance_value.innerText = `${formatNumberWithCommas(response.data.account.balance)} THB`;
-                    balance_pua_value.innerText = `${formatNumberWithCommas(response.data.account.balance_chip)} PUA`;
-                    deposit_value.innerText = `${formatNumberWithCommas(response.data.account.deposit)} THB`;
-                    withdraw_value.innerText = `${formatNumberWithCommas(response.data.account.withdraw)} THB`;
-                    balance_all_value.innerHTML = `${formatNumberWithCommas(response.data.account.balance + response.data.account.balance_chip)} THB`
-                })
-            } else {
-                axios(`https://api.hewkawar.xyz/app/bank/balance?session_id=${session_id}`).then((response) => {
-                    const loadScreen = document.getElementById('loadScreen');
-                    const loader = document.getElementById('loader');
-                    loadScreen.style.display = 'none';
-                    loader.style.display = 'none';
-                    balance_value.innerText = `${formatNumberWithCommas(response.data.account.balance)} THB`;
-                    balance_pua_value.innerText = `${formatNumberWithCommas(response.data.account.balance_chip)} PUA`;
-                    deposit_value.innerText = `${formatNumberWithCommas(response.data.account.deposit)} THB`;
-                    withdraw_value.innerText = `${formatNumberWithCommas(response.data.account.withdraw)} THB`;
-                    balance_all_value.innerHTML = `${formatNumberWithCommas(response.data.account.balance + response.data.account.balance_chip)} THB`
-                })
-            }
-
+            Swal.fire({
+                title: "Loading...",
+                icon: "info",
+                showConfirmButton: false,
+                timer: 1000,
+                willClose: () => {
+                    getBalance(month, year);
+                }
+            });
         }
     })
 }
 
+function getBalance(month, year) {
+    if (month && year) {
+        axios(`https://api.hewkawar.xyz/app/bank/transition?session_id=${session_id}&month=${month}&year=${year}`).then((response) => {
+            const loadScreen = document.getElementById('loadScreen');
+            const loader = document.getElementById('loader');
+            loadScreen.style.display = 'none';
+            loader.style.display = 'none';
+            balance_value.innerText = `${formatNumberWithCommas(response.data.account.balance)} THB`;
+            balance_pua_value.innerText = `${formatNumberWithCommas(response.data.account.balance_chip)} PUA`;
+            deposit_value.innerText = `${formatNumberWithCommas(response.data.account.deposit)} THB`;
+            withdraw_value.innerText = `${formatNumberWithCommas(response.data.account.withdraw)} THB`;
+            balance_all_value.innerHTML = `${formatNumberWithCommas(response.data.account.balance + response.data.account.balance_chip)} THB`
+        })
+    } else {
+        axios(`https://api.hewkawar.xyz/app/bank/balance?session_id=${session_id}`).then((response) => {
+            const loadScreen = document.getElementById('loadScreen');
+            const loader = document.getElementById('loader');
+            loadScreen.style.display = 'none';
+            loader.style.display = 'none';
+            balance_value.innerText = `${formatNumberWithCommas(response.data.account.balance)} THB`;
+            balance_pua_value.innerText = `${formatNumberWithCommas(response.data.account.balance_chip)} PUA`;
+            deposit_value.innerText = `${formatNumberWithCommas(response.data.account.deposit)} THB`;
+            withdraw_value.innerText = `${formatNumberWithCommas(response.data.account.withdraw)} THB`;
+            balance_all_value.innerHTML = `${formatNumberWithCommas(response.data.account.balance + response.data.account.balance_chip)} THB`
+        })
+    }
+}
 function logout() {
     Swal.fire({
         title: "Logout",
@@ -83,9 +93,6 @@ function getHewkawArLoginDetail() {
         code: getUrlParameter('code')
     }).then((response) => {
         const formattedDateTime = formatTime(expire);
-        console.log(response.data);
-        console.log(formattedDateTime);
-
 
         axios.post("https://api.hewkawar.xyz/app/bank/session", {
             username: response.data.username,
