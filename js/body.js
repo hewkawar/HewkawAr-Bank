@@ -23,7 +23,7 @@ if (getCookie('session')) {
     getSession();
 }
 
-function getSession() {
+function getSession(month, year) {
     const session_id = getCookie('session');
 
     axios(`https://api.hewkawar.xyz/app/bank/session?session_id=${session_id}`).then((response) => {
@@ -31,17 +31,32 @@ function getSession() {
             userprofile.src = response.data.profileurl;
             userdisplayname.innerText = response.data.displayname;
 
-            axios(`https://api.hewkawar.xyz/app/bank/balance?session_id=${session_id}`).then((response) => {
-                const loadScreen = document.getElementById('loadScreen');
-                const loader = document.getElementById('loader');
-                loadScreen.style.display = 'none';
-                loader.style.display = 'none';
-                balance_value.innerText = `${formatNumberWithCommas(response.data.account.balance)} THB`;
-                balance_pua_value.innerText = `${formatNumberWithCommas(response.data.account.balance_chip)} PUA`;
-                deposit_value.innerText = `${formatNumberWithCommas(response.data.account.deposit)} THB`;
-                withdraw_value.innerText = `${formatNumberWithCommas(response.data.account.withdraw)} THB`;
-                balance_all_value.innerHTML = `${formatNumberWithCommas(response.data.account.balance + response.data.account.balance_chip)} THB`
-            })
+            if (month && year) {
+                axios(`https://api.hewkawar.xyz/app/bank/transition?session_id=${session_id}&month=${month}&year=${year}`).then((response) => {
+                    const loadScreen = document.getElementById('loadScreen');
+                    const loader = document.getElementById('loader');
+                    loadScreen.style.display = 'none';
+                    loader.style.display = 'none';
+                    balance_value.innerText = `${formatNumberWithCommas(response.data.account.balance)} THB`;
+                    balance_pua_value.innerText = `${formatNumberWithCommas(response.data.account.balance_chip)} PUA`;
+                    deposit_value.innerText = `${formatNumberWithCommas(response.data.account.deposit)} THB`;
+                    withdraw_value.innerText = `${formatNumberWithCommas(response.data.account.withdraw)} THB`;
+                    balance_all_value.innerHTML = `${formatNumberWithCommas(response.data.account.balance + response.data.account.balance_chip)} THB`
+                })
+            } else {
+                axios(`https://api.hewkawar.xyz/app/bank/balance?session_id=${session_id}`).then((response) => {
+                    const loadScreen = document.getElementById('loadScreen');
+                    const loader = document.getElementById('loader');
+                    loadScreen.style.display = 'none';
+                    loader.style.display = 'none';
+                    balance_value.innerText = `${formatNumberWithCommas(response.data.account.balance)} THB`;
+                    balance_pua_value.innerText = `${formatNumberWithCommas(response.data.account.balance_chip)} PUA`;
+                    deposit_value.innerText = `${formatNumberWithCommas(response.data.account.deposit)} THB`;
+                    withdraw_value.innerText = `${formatNumberWithCommas(response.data.account.withdraw)} THB`;
+                    balance_all_value.innerHTML = `${formatNumberWithCommas(response.data.account.balance + response.data.account.balance_chip)} THB`
+                })
+            }
+
         }
     })
 }
@@ -189,7 +204,7 @@ function withdraw() {
                     try {
                         const response = await axios.post("https://api.hewkawar.xyz/app/bank/withdraw", {
                             session_id: session_id,
-                            amount: result.value, // Use the withdrawn amount from the previous step
+                            amount: result.value,
                             currency: value
                         });
 
@@ -294,7 +309,7 @@ function populateMonthYearDropdown() {
 
 function monthYearSelectOnChange() {
     const [year, month] = document.getElementById("monthYearSelect").value.split('-');
-    getHewkawArLoginDetail()
+    getSession(month, year);
 }
 
 populateMonthYearDropdown();
