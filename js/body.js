@@ -354,7 +354,9 @@ function monthYearSelectOnChange() {
     getSession(month, year, true);
 }
 
-populateMonthYearDropdown();
+if (document.getElementById("monthYearSelect")) {
+    populateMonthYearDropdown();
+}
 
 const autoUpdate = setInterval(() => {
     var currentDate = new Date();
