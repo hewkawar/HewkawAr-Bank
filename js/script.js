@@ -6,7 +6,7 @@ async function HewkawArLogout() {
 
     await axios({
         method: "delete",
-        url: "https://api.hewkawar.xyz/app/m2bot/voicechat",
+        url: "https://api.hewkawar.xyz/app/bank/session",
         data: {
             session_id: session_id
         }
