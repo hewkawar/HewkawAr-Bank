@@ -74,7 +74,10 @@ function getSession(month, year, popup = false) {
             Swal.fire({
                 title: "Something error",
                 text: "try again later",
-                icon: "error"
+                icon: "error",
+                willClose: () => {
+                    window.location.href = "/logout.html";
+                }
             })
         }
     });
