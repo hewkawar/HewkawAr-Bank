@@ -56,7 +56,28 @@ function getSession(month, year, popup = false) {
                 getBalance(session_id, month, year);
             }
         }
-    })
+    }).catch((error) => {
+        if (error.response && error.response.status === 406) {
+            Swal.fire({
+                title: "Access Denied",
+                icon: "error"
+            });
+        } else if (error.response && error.response.status === 502) {
+            Swal.fire({
+                title: "Can't Connect to Server",
+                icon: "error",
+                willClose: () => {
+                    window.location.href = "/logout.html";
+                }
+            });
+        } else {
+            Swal.fire({
+                title: "Something error",
+                text: "try again later",
+                icon: "error"
+            })
+        }
+    });
 }
 
 function getBalance(session_id, month, year) {
