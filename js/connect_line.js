@@ -36,12 +36,8 @@ function getHewkawArLoginDetail() {
                         });
                         Swal.fire({
                             title: "Connect Success!",
+                            text: "You can close this window",
                             icon: "success",
-                            timer: 1000,
-                            timerProgressBar: true,
-                            willClose: () => {
-                                window.close();
-                            }
                         });
                     } else if (result.isDenied) {
                         Swal.fire({
