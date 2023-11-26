@@ -358,10 +358,12 @@ if (document.getElementById("monthYearSelect")) {
     populateMonthYearDropdown();
 }
 
-const autoUpdate = setInterval(() => {
-    var currentDate = new Date();
-    var currentYear = currentDate.getFullYear();
-    var currentMonth = currentDate.getMonth() + 1;
-
-    getSession(currentMonth, currentYear);
-}, 5000)
+if (getlocalStorage("session")) {
+    const autoUpdate = setInterval(() => {
+        var currentDate = new Date();
+        var currentYear = currentDate.getFullYear();
+        var currentMonth = currentDate.getMonth() + 1;
+    
+        getSession(currentMonth, currentYear);
+    }, 5000)
+}
