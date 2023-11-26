@@ -3,7 +3,7 @@ async function HewkawArLogout() {
     removelocalStorage("session");
     removelocalStorage("code");
 
-    await axios({
+    axios({
         method: "delete",
         url: "https://api.hewkawar.xyz/app/bank/session",
         data: {
