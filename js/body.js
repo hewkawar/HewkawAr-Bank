@@ -62,7 +62,7 @@ function getSession(month, year, popup = false) {
                 title: "Access Denied",
                 icon: "error"
             });
-        } else if (error.response && error.response.status === 502) {
+        } else if (error.response.status === 502) {
             Swal.fire({
                 title: "Can't Connect to Server",
                 icon: "error",
