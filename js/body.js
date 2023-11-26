@@ -26,6 +26,17 @@ if (getCookie('session')) {
 function getSession(month, year) {
     const session_id = getCookie('session');
 
+    if (!session_id) {
+        clearInterval(autoUpdate);
+        Swal.fire({
+            title: "Session Expired",
+            icon: "error",
+            willClose: () => {
+                window.location.href = "/logout.html";
+            }
+        });
+    }
+
     axios(`https://api.hewkawar.xyz/app/bank/session?session_id=${session_id}`).then((response) => {
         if (userdisplayname && userprofile) {
             userprofile.src = response.data.profileurl;
@@ -71,6 +82,7 @@ function getBalance(session_id, month, year) {
         })
     }
 }
+
 function logout() {
     Swal.fire({
         title: "Logout",
@@ -320,3 +332,11 @@ function monthYearSelectOnChange() {
 }
 
 populateMonthYearDropdown();
+
+const autoUpdate = setInterval(() => {
+    var currentDate = new Date();
+    var currentYear = currentDate.getFullYear();
+    var currentMonth = currentDate.getMonth() + 1;
+
+    getSession(currentMonth, currentYear);
+}, 5000)
