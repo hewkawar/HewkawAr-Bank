@@ -17,12 +17,6 @@ function getHewkawArLoginDetail() {
             profileurl: response.data.profile_url,
         })
             .then((response) => {
-                axios.post("https://api.hewkawar.xyz/app/bank/connect", {
-                    platform: 'line',
-                    uuid: getUrlParameter('uuid'),
-                    username: response.data.username,
-                    session_id: response.data.detail.session_id
-                }).catch((error) => {});
                 setlocalStorage("session", response.data.detail.session_id);
                 Swal.fire({
                     title: "Login Success!",
@@ -34,6 +28,12 @@ function getHewkawArLoginDetail() {
                     denyButtonText: `Cancel`
                 }).then((result) => {
                     if (result.isConfirmed) {
+                        axios.post("https://api.hewkawar.xyz/app/bank/connect", {
+                            platform: 'line',
+                            uuid: getUrlParameter('uuid'),
+                            username: response.data.detail.username,
+                            session_id: response.data.detail.session_id
+                        });
                         Swal.fire({
                             title: "Connect Success!",
                             icon: "success",
