@@ -23,7 +23,7 @@ if (getCookie('session')) {
     getSession();
 }
 
-function getSession(month, year) {
+function getSession(month, year, popup = false) {
     const session_id = getCookie('session');
 
     if (!session_id) {
@@ -42,15 +42,19 @@ function getSession(month, year) {
             userprofile.src = response.data.profileurl;
             userdisplayname.innerText = response.data.displayname;
 
-            Swal.fire({
-                title: "Loading...",
-                icon: "info",
-                showConfirmButton: false,
-                timer: 1000,
-                willClose: () => {
-                    getBalance(session_id, month, year);
-                }
-            });
+            if (popup) {
+                Swal.fire({
+                    title: "Loading...",
+                    icon: "info",
+                    showConfirmButton: false,
+                    timer: 1000,
+                    willClose: () => {
+                        getBalance(session_id, month, year);
+                    }
+                });
+            } else {
+                getBalance(session_id, month, year);
+            }
         }
     })
 }
@@ -328,7 +332,7 @@ function populateMonthYearDropdown() {
 
 function monthYearSelectOnChange() {
     const [year, month] = document.getElementById("monthYearSelect").value.split('-');
-    getSession(month, year);
+    getSession(month, year, true);
 }
 
 populateMonthYearDropdown();
