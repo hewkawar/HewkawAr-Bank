@@ -9,6 +9,8 @@ async function HewkawArLogout() {
         data: {
             session_id: session_id
         }
+    }).catch((error) => {
+        window.location.href = "/login";
     });
 
     window.location.href = "/login";
