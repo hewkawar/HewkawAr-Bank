@@ -16,7 +16,6 @@ if (getUrlParameter('code')) {
             getHewkawArLoginDetail()
         }
     });
-
 }
 
 if (getlocalStorage('session')) {
@@ -49,13 +48,23 @@ function getSession(month, year, popup = false) {
                     showConfirmButton: false,
                     timer: 1000,
                     willClose: () => {
-                        getBalance(session_id, month, year);
+                        if (balance_value) {
+                            getBalance(session_id, month, year);
+                        }
                     }
                 });
             } else {
-                getBalance(session_id, month, year);
+                if (balance_value) {
+                    getBalance(session_id, month, year);
+                }
             }
         }
+
+        return {
+            username: response.data.username,
+            displayname: response.data.displayname,
+            profileurl: response.data.profileurl
+        };
     }).catch((error) => {
         if (error.response && error.response.status === 406) {
             Swal.fire({
@@ -130,7 +139,6 @@ function getHewkawArLoginDetail() {
     axios.post("https://api.hewkawar.xyz/oauth2/token", {
         code: getUrlParameter('code')
     }).then((response) => {
-
         axios.post("https://api.hewkawar.xyz/app/bank/session", {
             username: response.data.username,
             displayname: response.data.display_name,
@@ -166,9 +174,9 @@ function getHewkawArLoginDetail() {
 
 function HewkawArLogin() {
     axios.post('https://api.hewkawar.xyz/oauth2/login', {
-        redirect_url: "https://bank.hewkawar.xyz/login"
+        redirect_url: window.location.href
     }).then((response) => {
-        setlocalStorage("code", response.data.code, 4)
+        setlocalStorage("code", response.data.code)
         window.location.href = response.data.url;
     });
 }
