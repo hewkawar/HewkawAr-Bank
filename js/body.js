@@ -37,14 +37,14 @@ function getSession(month, year) {
                 showConfirmButton: false,
                 timer: 1000,
                 willClose: () => {
-                    getBalance(month, year);
+                    getBalance(session_id, month, year);
                 }
             });
         }
     })
 }
 
-function getBalance(month, year) {
+function getBalance(session_id, month, year) {
     if (month && year) {
         axios(`https://api.hewkawar.xyz/app/bank/transition?session_id=${session_id}&month=${month}&year=${year}`).then((response) => {
             const loadScreen = document.getElementById('loadScreen');
