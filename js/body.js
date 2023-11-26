@@ -19,12 +19,12 @@ if (getUrlParameter('code')) {
 
 }
 
-if (getCookie('session')) {
+if (getlocalStorage('session')) {
     getSession();
 }
 
 function getSession(month, year, popup = false) {
-    const session_id = getCookie('session');
+    const session_id = getlocalStorage('session');
 
     if (!session_id) {
         clearInterval(autoUpdate);
@@ -32,7 +32,7 @@ function getSession(month, year, popup = false) {
             title: "Session Expired",
             icon: "error",
             willClose: () => {
-                window.location.href = "/logout.html";
+                window.location.href = "/logout";
             }
         });
     }
@@ -67,7 +67,7 @@ function getSession(month, year, popup = false) {
                 title: "Can't Connect to Server",
                 icon: "error",
                 willClose: () => {
-                    window.location.href = "/logout.html";
+                    window.location.href = "/logout";
                 }
             });
         } else {
@@ -76,7 +76,7 @@ function getSession(month, year, popup = false) {
                 text: "try again later",
                 icon: "error",
                 willClose: () => {
-                    window.location.href = "/logout.html";
+                    window.location.href = "/logout";
                 }
             })
         }
@@ -121,26 +121,22 @@ function logout() {
         cancelButtonText: "Cancel"
     }).then((result) => {
         if (result.isConfirmed) {
-            window.location.href = "/logout.html";
+            window.location.href = "/logout";
         }
     });
 }
 
 function getHewkawArLoginDetail() {
-    const expire = Date.now() + 4 * 60 * 60 * 1000;
-
     axios.post("https://api.hewkawar.xyz/oauth2/token", {
         code: getUrlParameter('code')
     }).then((response) => {
-        const formattedDateTime = formatTime(expire);
 
         axios.post("https://api.hewkawar.xyz/app/bank/session", {
             username: response.data.username,
             displayname: response.data.display_name,
             profileurl: response.data.profile_url,
-            expire: formattedDateTime,
         }).then((response) => {
-            setCookie("session", response.data.detail.session_id, 4);
+            setlocalStorage("session", response.data.detail.session_id);
             Swal.fire({
                 title: "Login Success!",
                 text: "We will redirect you soon",
@@ -150,7 +146,6 @@ function getHewkawArLoginDetail() {
                 willClose: () => {
                     window.location.href = "/";
                 }
-
             })
         });
     }).catch((error) => {
@@ -171,15 +166,15 @@ function getHewkawArLoginDetail() {
 
 function HewkawArLogin() {
     axios.post('https://api.hewkawar.xyz/oauth2/login', {
-        redirect_url: "https://bank.hewkawar.xyz/login.html"
+        redirect_url: "https://bank.hewkawar.xyz/login"
     }).then((response) => {
-        setCookie("code", response.data.code, 4)
+        setlocalStorage("code", response.data.code, 4)
         window.location.href = response.data.url;
     });
 }
 
 function deposit() {
-    const session_id = getCookie('session');
+    const session_id = getlocalStorage('session');
     Swal.fire({
         title: "Deposit Amount",
         input: "text",
@@ -210,7 +205,7 @@ function deposit() {
 }
 
 function withdraw() {
-    const session_id = getCookie('session');
+    const session_id = getlocalStorage('session');
     Swal.fire({
         title: "Withdraw Amount",
         input: "text",
@@ -272,7 +267,7 @@ function withdraw() {
 }
 
 function convertTHB() {
-    const session_id = getCookie('session');
+    const session_id = getlocalStorage('session');
     Swal.fire({
         title: "Convert to THB Amount",
         input: "text",
@@ -303,7 +298,7 @@ function convertTHB() {
 }
 
 function convertPUA() {
-    const session_id = getCookie('session');
+    const session_id = getlocalStorage('session');
     Swal.fire({
         title: "Convert to PUA Amount",
         input: "text",

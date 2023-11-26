@@ -23,6 +23,18 @@ function deleteCookie(name) {
     document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 
+function setlocalStorage(key, value) {
+    return localStorage.setItem(key, value);
+}
+
+function getlocalStorage(key) {
+    return localStorage.getItem(key);
+}
+
+function removelocalStorage(key) {
+    return localStorage.removeItem(key);
+}
+
 function getUrlParameter(name) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(name);
