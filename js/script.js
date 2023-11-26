@@ -9,7 +9,31 @@ async function HewkawArLogout() {
         data: {
             session_id: session_id
         }
-    }).catch((error) => {
+    }).than((response) => {
+        Swal.fire({
+            title: "Logout Success!",
+            text: "We will redirect you soon",
+            icon: "success",
+            timer: 2000,
+            timerProgressBar: true,
+            willClose: () => {
+                window.location.href = "/login";
+            }
+        })
+    })
+    .catch((error) => {
+        if (error.response && error.response.status === 406) {
+            Swal.fire({
+                title: "Access Denied",
+                icon: "error"
+            })
+        } else {
+            Swal.fire({
+                title: "Something error",
+                text: "try again later",
+                icon: "error"
+            })
+        }
         window.location.href = "/login";
     });
 
