@@ -24,14 +24,26 @@ function deleteCookie(name) {
 }
 
 function setlocalStorage(key, value) {
+    if (!typeof localStorage !== 'undefined' && !localStorage !== null) {
+        console.error('localStorage is not supported in this environment');
+    }
+    
     return localStorage.setItem(key, value);
 }
 
 function getlocalStorage(key) {
+    if (!typeof localStorage !== 'undefined' && !localStorage !== null) {
+        console.error('localStorage is not supported in this environment');
+    }
+
     return localStorage.getItem(key);
 }
 
 function removelocalStorage(key) {
+    if (!typeof localStorage !== 'undefined' && !localStorage !== null) {
+        console.error('localStorage is not supported in this environment');
+    }
+    
     return localStorage.removeItem(key);
 }
 
