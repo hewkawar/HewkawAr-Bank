@@ -66,6 +66,7 @@ function getSession(month, year, popup = false) {
             profileurl: response.data.profileurl
         };
     }).catch((error) => {
+        clearInterval(autoUpdate);
         if (error.response && error.response.status === 406) {
             Swal.fire({
                 title: "Access Denied",
@@ -346,16 +347,30 @@ function populateMonthYearDropdown() {
     var currentYear = currentDate.getFullYear();
     var currentMonth = currentDate.getMonth() + 1;
 
-    for (var year = startYear; year <= currentYear; year++) {
+    for (var year = currentYear; year >= startYear; year--) {
         var endMonth = (year === currentYear) ? currentMonth : 12;
-        for (var month = (year === startYear) ? startMonth : 1; month <= endMonth; month++) {
+        var startMonthValue = (year === startYear) ? startMonth : 1;
+
+        for (var month = endMonth; month >= startMonthValue; month--) {
             var option = document.createElement("option");
             option.value = year + "-" + (month < 10 ? "0" + month : month);
             option.text = month + "/" + year;
             select.add(option);
         }
     }
+
+    // Set default option to the newest value
+    var defaultYear = currentYear;
+    var defaultMonth = currentMonth < 10 ? "0" + currentMonth : currentMonth;
+    var defaultValue = defaultYear + "-" + defaultMonth;
+    
+    // Select the default option
+    var defaultOption = document.querySelector("#monthYearSelect option[value='" + defaultValue + "']");
+    if (defaultOption) {
+        defaultOption.selected = true;
+    }
 }
+
 
 function monthYearSelectOnChange() {
     const [year, month] = document.getElementById("monthYearSelect").value.split('-');
@@ -367,11 +382,8 @@ if (document.getElementById("monthYearSelect")) {
 }
 
 if (getlocalStorage("session")) {
-    const autoUpdate = setInterval(() => {
-        var currentDate = new Date();
-        var currentYear = currentDate.getFullYear();
-        var currentMonth = currentDate.getMonth() + 1;
-    
-        getSession(currentMonth, currentYear);
+    var autoUpdate = setInterval(() => {
+        const [year, month] = document.getElementById("monthYearSelect").value.split('-');
+        getSession(month, year);
     }, 5000)
 }
