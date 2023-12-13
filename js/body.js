@@ -186,7 +186,7 @@ function deposit() {
     const session_id = getlocalStorage('session');
     Swal.fire({
         title: "Deposit Amount",
-        input: "text",
+        input: "number",
         inputAttributes: {
             autocapitalize: "off"
         },
@@ -217,7 +217,7 @@ function withdraw() {
     const session_id = getlocalStorage('session');
     Swal.fire({
         title: "Withdraw Amount",
-        input: "text",
+        input: "number",
         inputAttributes: {
             autocapitalize: "off"
         },
@@ -279,7 +279,7 @@ function convertTHB() {
     const session_id = getlocalStorage('session');
     Swal.fire({
         title: "Convert to THB Amount",
-        input: "text",
+        input: "number",
         inputAttributes: {
             autocapitalize: "off"
         },
@@ -310,7 +310,7 @@ function convertPUA() {
     const session_id = getlocalStorage('session');
     Swal.fire({
         title: "Convert to PUA Amount",
-        input: "text",
+        input: "number",
         inputAttributes: {
             autocapitalize: "off"
         },
