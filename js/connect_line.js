@@ -33,11 +33,15 @@ function getHewkawArLoginDetail() {
                             uuid: getUrlParameter('uuid'),
                             username: response.data.detail.username,
                             session_id: response.data.detail.session_id
-                        });
-                        Swal.fire({
-                            title: "Connect Success!",
-                            text: "You can close this window",
-                            icon: "success",
+                        }).then(response => {
+                            Swal.fire({
+                                title: "Connect Success!",
+                                text: "You can close this window",
+                                icon: "success",
+                                willClose: () => {
+                                    window.close();
+                                }
+                            });
                         });
                     } else if (result.isDenied) {
                         Swal.fire({
