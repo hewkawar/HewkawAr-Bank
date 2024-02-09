@@ -6,7 +6,7 @@ const deposit_value = document.getElementById('deposit');
 const withdraw_value = document.getElementById('withdraw');
 const balance_all_value = document.getElementById('balance_all');
 
-if (getUrlParameter('code')) {
+if (getUrlParameter('token')) {
     Swal.fire({
         title: "Loading...",
         icon: "info",
@@ -137,13 +137,11 @@ function logout() {
 }
 
 function getHewkawArLoginDetail() {
-    axios.post("https://api.hewkawar.xyz/oauth2/token", {
-        code: getUrlParameter('code')
-    }).then((response) => {
+    axios.get(`https://auth-api.hewkawar.xyz/token/${getUrlParameter('token')}`).then((response) => {
         axios.post("https://api.hewkawar.xyz/app/bank/session", {
-            username: response.data.username,
-            displayname: response.data.display_name,
-            profileurl: response.data.profile_url,
+            username: response.data.data.username,
+            displayname: response.data.data.display_name,
+            profileurl: response.data.data.profile_url,
         }).then((response) => {
             setlocalStorage("session", response.data.detail.session_id);
             Swal.fire({
@@ -174,12 +172,7 @@ function getHewkawArLoginDetail() {
 }
 
 function HewkawArLogin() {
-    axios.post('https://api.hewkawar.xyz/oauth2/login', {
-        redirect_url: window.location.href
-    }).then((response) => {
-        setlocalStorage("code", response.data.code)
-        window.location.href = response.data.url;
-    });
+    window.location.href = `https://auth.hewkawar.xyz/logout?redirect_uri=${window.location.href}`;
 }
 
 function deposit() {

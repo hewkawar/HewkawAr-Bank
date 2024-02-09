@@ -12,22 +12,20 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/utils.js"></script>
-    <script src="/js/script.js"></script>
-
-
 </head>
 
 <body>
     <div class="container text-center position-absolute top-50 start-50 translate-middle">
         <img src="/img/BankH-logo.png" alt="bank.png" class="w-25">
         <div class="login mt-3">
-            <button onclick='HewkawArLoginConnectLine()' class="btn btn-outline-primary">Login With HewkawAr</button>
+            <button onclick='HewkawArOldLogin()' class="btn btn-outline-primary">Login With HewkawAr Old Gateway</button>
+            <button onclick='HewkawArNewLogin()' class="btn btn-outline-success">Login With HewkawAr New Gateway</button>
         </div>
     </div>
-    <script src="/js/connect_line.js"></script>
+    <script src="/js/move_to_new_version.js"></script>
     <script>
-        if (getlocalStorage('session')) {
-            getSession();
+        if (getlocalStorage('session_old') && getlocalStorage('session_new')) {
+            runMoveNew();
         }
     </script>
 </body>
