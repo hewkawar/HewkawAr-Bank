@@ -171,7 +171,7 @@ function getHewkawArLoginDetail() {
     });
 }
 
-function HewkawArLogin() {
+function HewkawArLogin(token) {
     window.location.href = `https://auth.hewkawar.xyz/logout?redirect_uri=${window.location.href}`;
 }
 

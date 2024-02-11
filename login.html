@@ -11,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <script src="/js/utils.js"></script>
     <script src="/js/script.js"></script>
     <script>
@@ -25,7 +26,7 @@
     <div class="container text-center position-absolute top-50 start-50 translate-middle">
         <img src="/img/BankH-logo.png" alt="bank.png" class="w-25">
         <div class="login mt-3">
-            <button onclick='HewkawArLogin()' class="btn btn-outline-primary">Login With HewkawAr Gateway</button>
+            <button data-sitekey="6Le3_24pAAAAAMuKzg3cTqBf1gwNxpvU-N-wDL_P" data-callback="HewkawArLogin" data-action='submit' class="g-recaptcha btn btn-outline-primary">Login With HewkawAr Gateway</button>
         </div>
         <a href="/move/new_version" class="btn btn-outline-danger mt-5">Move data to new account</a>
     </div>

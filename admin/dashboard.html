@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - BankH</title>
+    <link rel="shortcut icon" href="/img/BankH-logo-only-H.png" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/admin.js"></script>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>แดชบอร์ด</h1>
+        <div class="status">
+            <div class="card card-member">
+                <h4 class="card-header">จำนวนผู้ใช้ทั้งหมด</h4>
+                <div class="card-body">
+                    <h2 id="member-count">-</h2>
+                    <h2>คน</h2>
+                </div>
+            </div>
+            <div class="card card-member-line">
+                <h4 class="card-header">จำนวนการเชื่อมต่อบัญชี Line Offical Account</h4>
+                <div class="card-body">
+                    <h2 id="member-line-count">-</h2>
+                    <h2>คน</h2>
+                </div>
+            </div>
+            <div class="card card-transition">
+                <h4 class="card-header">จำนวนการเปลี่ยนแปลงของเดือนนี้</h4>
+                <div class="card-body">
+                    <h2 id="transition-count">-</h2>
+                    <h2>ครั้ง</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="session">
+        <h1>การเปลี่ยนแปลงของบัญชี</h1>
+        <table class="t-table" id="transition-table">
+            <thead>
+                <tr class="t-table-tr">
+                    <th class="t-table-th">#</th>
+                    <th class="t-table-th">Username</th>
+                    <th class="t-table-th">Type</th>
+                    <th class="t-table-th">Amount</th>
+                    <th class="t-table-th">Timestamp</th>
+                </tr>
+            </thead>
+            <tbody id="transition-table-data">
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="session">
+        <h1>เซสชั่นที่ใช้งานอยู่</h1>
+        <table class="t-table" id="session-table">
+            <thead>
+                <tr class="t-table-tr">
+                    <th class="t-table-th">#</th>
+                    <th class="t-table-th">Session ID</th>
+                    <th class="t-table-th">Username</th>
+                    <th class="t-table-th">Display Name</th>
+                    <th class="t-table-th">User-Agent</th>
+                    <th class="t-table-th">Timestamp</th>
+                    <th class="t-table-th">Action</th>
+                </tr>
+            </thead>
+            <tbody id="session-table-data">
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="session">
+        <h1>บัญชีผู้ใช้</h1>
+        <table class="t-table" id="account-table">
+            <thead>
+                <tr class="t-table-tr">
+                    <th class="t-table-th">#</th>
+                    <th class="t-table-th">Username</th>
+                    <th class="t-table-th">Balance</th>
+                    <th class="t-table-th">Balance Pua</th>
+                    <th class="t-table-th">Last Update</th>
+                    <th class="t-table-th">Action</th>
+                </tr>
+            </thead>
+            <tbody id="account-table-data">
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="session">
+        <h1>บัญชีผู้ใช้ที่เชื่อมกับ Line Offical</h1>
+        <table class="t-table" id="account-line-table">
+            <thead>
+                <tr class="t-table-tr">
+                    <th class="t-table-th">#</th>
+                    <th class="t-table-th">Username</th>
+                    <th class="t-table-th">UID</th>
+                    <th class="t-table-th">Last Update</th>
+                    <th class="t-table-th">Action</th>
+                </tr>
+            </thead>
+            <tbody id="account-line-table-data">
+
+            </tbody>
+        </table>
+    </div>
+
+    <script src="/js/admin.body.js"></script>
+</body>
+
+</html>

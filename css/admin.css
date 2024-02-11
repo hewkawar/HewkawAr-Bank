@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+
+body {
+    background-color: #eff7ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+* {
+    font-family: 'Kanit', sans-serif;
+}
+
+.container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.status {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card {
+    --background-color: #f0f0f0;
+    --w: 400px;
+    background-color: var(--background-color);
+    margin: 10px;
+    width: var(--w);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-header {
+    border-bottom: 1px solid #000;
+    height: 50px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-member {
+    --background-color: #ffacac;
+}
+
+.card-member-line {
+    --background-color: #aeffa3;
+}
+
+.card-transition {
+    --background-color: #a9e4ff;
+}
+
+.session {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    margin-top: 30px;
+}
+
+.t-table {
+    border: 1px solid #000;
+}
