@@ -14,12 +14,6 @@
     <script src="https://www.google.com/recaptcha/api.js"></script>
     <script src="/js/utils.js"></script>
     <script src="/js/script.js"></script>
-    <script>
-        if (getlocalStorage('session')) {
-            window.location.href = "/";
-        }
-    </script>
-
 </head>
 
 <body>
@@ -31,6 +25,11 @@
         <a href="/move/new_version" class="btn btn-outline-danger mt-5">Move data to new account</a>
     </div>
     <script src="/js/body.js"></script>
+    <script>
+        if (getlocalStorage('session')) {
+            window.location.href = "/";
+        }
+    </script>
 </body>
 
 </html>
