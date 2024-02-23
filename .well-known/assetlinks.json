@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "xyz.hewkawar.bankh",
+      "sha256_cert_fingerprints": ["0C:4F:D9:C6:F5:E7:C9:F5:70:56:EF:9A:90:50:88:D6:57:84:E7:8F:FB:E5:37:86:75:F2:E9:37:6E:0F:23:FB"]
+    }
+  }
+]
